@@ -1,0 +1,133 @@
+/* 
+* 秒杀导航css --水木年华doube 
+* update 2013-11-16
+* 修改 span标签 为左浮动块级元素
+*/
+
+body{
+  font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+}
+
+.clear-both{
+	clear: both;
+}
+
+.section-block{
+  /*width:990px;*/
+  margin:0 auto;
+  clear: both;
+}
+
+
+.sends-container{
+	margin:5px auto;
+	clear:left;
+	height:35px;
+	background: url(http://gtms01.alicdn.com/tps/i1/T11owrFl0XXXcmPIvc-150-35.png) -5px 0 no-repeat;
+}
+  
+.sends-container a{
+	cursor:pointer;
+	float:left;
+	margin-left:1px;
+	width:69px;
+	height:100%;
+	text-decoration:none;
+	font: 12px/1.5 tahoma,arial,\5b8b\4f53;
+}
+  a, a:hover{
+    color:none;
+  }
+  a.mrg_lft155{
+    margin-left:150px;
+  }
+
+  /* span标签 公共样式 */
+  .hours, .state{
+    float: left;
+    height:100%;
+    overflow:hidden; 
+    text-align:center;
+    font-weight:bold;
+  }  
+  .hours{
+    width:37px;
+    line-height:35px;
+  } 
+  .state{
+    width:32px;
+  }
+    
+  /* 完成 颜色 */ 
+  a.doneCls{  
+    cursor:default;
+    background-color: #585655;
+    color: white;
+  }	
+  .doneCls span{
+    width:100%;
+  }
+  /* 秒杀结束 遮罩 */ 
+  .relative-cls{
+    position:relative;
+  }
+  .mast-dia{
+    text-align:center;
+    line-height:300px;
+    color:white;
+    font-weight:bold;
+    font-size:32px;
+  	position: absolute;
+  	width:100%;
+  	height:100%;
+    margin-left:0;
+    *margin-left:-10px;    
+  	background-color: black;	
+  	opacity: 0.7;
+  	filter:alpha(opacity=70);
+    -moz-opacity:0.7;
+    -khtml-opacity:0.7;
+	z-index: 10;
+    font-family: '微软雅黑';
+  }
+  
+  /* 秒杀中 颜色 */ 
+  .currCls{
+    background-color: #fe6c00;
+    color: white;
+  }  
+  .currCls span{
+  	line-height:35px;
+  }
+  
+  /* 即将秒杀 颜色 */ 
+  .futrueCls{
+    background-color: #fea100;
+    color: #ec3925;
+  }
+
+
+  /* 秒杀 完成 无文字描述 */
+  .doneCls .state{
+    width:0;
+  }
+  
+  /* 秒杀 当前 时间和状态文字 css */
+  .currCls .hours{
+    width:38px;
+    text-align: right;
+  }
+  .currCls .state{
+    width:31px;
+  }
+  
+  /* 查看过去 时间 点击样式 */
+  a.clickPastTimeBlock{
+    color: #707070;
+  }
+  
+  /* 查看未来 时间 点击样式 */
+  a.clickFutureTimeBlock{
+    color: #087EB6;
+  }
+
