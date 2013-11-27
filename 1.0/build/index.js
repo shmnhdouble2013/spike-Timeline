@@ -1,3 +1,9 @@
+/*
+combined files : 
+
+gallery/spike-Timeline/1.0/index
+
+*/
 /** 
 * @fileOverview 天猫双十一秒杀时间轴控制器(固定间隔时间 和 自定义 时间数组 2套生成时间轴方式，支持 时/分 时间高度灵活配置)   
 * @module spike-Timeline 
@@ -8,7 +14,7 @@
 * @update 2013-11-20  修正自定义 img-layzload机制、时间轴生成2套模式 优化 
 **/
  
-KISSY.add(function(S, RealTime){
+KISSY.add('gallery/spike-Timeline/1.0/index',function(S, RealTime){
         var Event = S.Event,
             DOM = S.DOM,
             Ajax = S.io;
