@@ -140,7 +140,7 @@ var defCfg = {
 
 ```javascript
 /**  
-* 秒杀时间时间段 发生
+* 过去时间段 时间触发
 * @event passSpikeChange  
 * @param {event} el对象
 * @param {Array} el.elTarget Dom元素
@@ -148,7 +148,7 @@ var defCfg = {
 'passSpikeChange',
 
 /**  
-* 秒杀时间时间段 发生
+* 当前时间段 时间触发
 * @event currSpikeChange  
 * @param {event} el对象
 * @param {Array} el.elTarget Dom元素
@@ -156,7 +156,7 @@ var defCfg = {
 'currSpikeChange',
 
 /**  
-* 秒杀时间时间段 发生
+* 未来时间段 时间触发
 * @event futureSpikeChange  
 * @param {event} el对象
 * @param {Array} el.elTarget Dom元素
@@ -170,10 +170,7 @@ var defCfg = {
 
 1. 配置的图片无法展现出来，请增加以下配置项：
 
-```javascript
-// 此项配置 是防止 与 其他图片懒加载组件冲突导致图片无法显示的配置项，比如若你已经 使用了kissy图片懒加载组件datalazyload，其img图片伪类属性为：data-ks-lazyload, 此时就需要配置 在此:
-
-lazyLoadSrc: 'data-ks-lazyload'
+    // 此项配置 是防止 与 其他图片懒加载组件冲突导致图片无法显示的配置项，比如若你已经 使用了kissy图片懒加载组件datalazyload，其img图片伪类属性为：data-ks-lazyload, 此时就需要配置:  lazyLoadSrc: 'data-ks-lazyload'
 
 2. 关于时间段 与 方活动区块的关联说明： 时间段 区块 和 活动容器内的相对区块内容一一对应，即 时间轴第一个时间段 对应 活动容器里 第一个 活动区块；
 3. 关于时间轴 组件样式、dom结构说明：本例内置模板展现时间轴样式，若不满足需求，你可以自定义你的模板dom结构字符串传入，并配置相应的钩子，引入相应的样式即可；

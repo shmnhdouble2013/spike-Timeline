@@ -149,7 +149,7 @@ KISSY.add('gallery/spike-Timeline/1.0/index',function(S, RealTime){
         // 支持的事件
         SpikeTimeline.events = [
             /**  
-            * 秒杀时间时间段 发生
+            * 过去时间段 时间触发
             * @event passSpikeChange  
             * @param {event} el对象
             * @param {Array} el.elTarget Dom元素
@@ -157,7 +157,7 @@ KISSY.add('gallery/spike-Timeline/1.0/index',function(S, RealTime){
             'passSpikeChange',
             
             /**  
-            * 秒杀时间时间段 发生
+            * 当前时间段 时间触发
             * @event currSpikeChange  
             * @param {event} el对象
             * @param {Array} el.elTarget Dom元素
@@ -165,7 +165,7 @@ KISSY.add('gallery/spike-Timeline/1.0/index',function(S, RealTime){
             'currSpikeChange',
 
             /**  
-            * 秒杀时间时间段 发生
+            * 未来时间段 时间触发
             * @event futureSpikeChange  
             * @param {event} el对象
             * @param {Array} el.elTarget Dom元素
