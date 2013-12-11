@@ -1002,20 +1002,14 @@
 			new SpikeTimeline('#J_time-container', {
 
                 // 服务器初始化时间 默认 毫秒数 number、支持 标准时间字符串如：'2013-11-20 17:30:32'
-                serviceTime: S.now(),    
+                serviceTime: S.now(), // 再次强调下：请不要照抄 这个demo配置，S.now() 获取的是本地时间，而不是服务器时间，这是演示   
                     
-                // 服务器时间 url接口 -- 默认
+                // 服务器时间 url接口
                 url: 'http://www.tmall.com/go/rgn/get_server_time.php?spm=0.0.0.0.c01Zvr',
 
 				// 时间范围 配置 --必须配置 ，否则可能导致 无js效果
 				startTime: '2013-11-20 00:00:00',  
-				endTime: '2115-11-11 23:59:59',
-				
-				// 是否 html 自定义 不规则 时间段 -- 若此处开启 则需要 配置 下列 customTime 时间点数组
-				isCustomTimePeriod: false,
-
-				// 自定义时间点 数组 --- 支持 时间大小顺序 随机排列！
-				customTime : ["17:45", "18:08", "20:45", "14:20", "20:43", "09", "19:31", "14:18", "14:35", "20:20", "22366812113:30", '12:20', '13:60'],
+				endTime: '2100-11-11 23:59:59',
 
 				// 秒杀 固定 间隔 支持 到分钟
 				timeLength: '2'				
