@@ -5,7 +5,7 @@
 * @creator  黄甲(水木年华double)<huangjia2015@gmail.com>
 * @depends  ks-core
 * @version  2.0  
-* @update 2013-11-20  修正自定义 img-layzload机制、时间轴生成2套模式 优化 
+* @update 2014-01-06  优化懒加载机制textarea
 **/
  
 KISSY.add(function(S, RealTime){
@@ -118,10 +118,7 @@ KISSY.add(function(S, RealTime){
             merchContainer: '#J_secondContent',
 
             // 活动展现内容区块 钩子
-            merchBlockCls: '.j_ul',
-
-            // 活动区块内容 图片 伪类src属性 钩子 --- 若 图片懒加载 则为 data-ks-lazyload,否则图片展现不出来哈！ 不填写 默认为 data-src
-            lazyLoadSrc: ''              
+            merchBlockCls: '.j_ul'    
         };  
 
 
@@ -175,12 +172,7 @@ KISSY.add(function(S, RealTime){
                     var _self = this;    
                        
                     _self._argumentsInit();
-					
-                    if(!_self.get('lazyLoadSrc')){
-                        _self.set('lazyLoadSrc', IMG_DATA_SRC); 
-                        _self.renderImgSrc();   
-                    }
-									
+													
                     _self._hideAllAcitve(); 
 					
                     _self._blockStateRender(); 
@@ -346,22 +338,11 @@ KISSY.add(function(S, RealTime){
 			    // 渲染懒加载图片
 				renderImgLazyLoad: function(el){
 					var _self = this,
-						Aimgs = [];
+						textareas_cls = S.one(el, 'data-lazyload-cls');
 						
-					if(el){
-						Aimgs = S.query('img', el);
-					}
-					
-                    S.each(Aimgs, function(el){
-                        var rotoSrc = DOM.attr(el, _self.get('lazyLoadSrc') ),
-							src = DOM.attr(el, 'src');
-						
-						if(rotoSrc === src){
-							return;
-						}
-						
-                        rotoSrc && DOM.attr(el, 'src', rotoSrc);                        
-                    }); 					
+					if(textareas_cls){
+						S.one(textareas_cls).text().	
+					}				
 				},				
 			   
                 // 懒加载 图片 初始化
