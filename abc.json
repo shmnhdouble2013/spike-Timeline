@@ -1,7 +1,7 @@
 {
     "name": "spike-Timeline",
     "comName":"SpikeTimeline",
-    "version": "1.0",
+    "version": "1.1",
     "desc": "强大的时间轴生成和活动管理组件",
     "tag":"时间轴",
     "githubName":"shmnhdouble2013",
