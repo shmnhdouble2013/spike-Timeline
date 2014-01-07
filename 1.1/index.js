@@ -4,8 +4,8 @@
 * @extends  KISSY.Base
 * @creator  黄甲(水木年华double)<huangjia2015@gmail.com>
 * @depends  ks-core
-* @version  1.0  
-* @update 2013-11-20  修正自定义 img-layzload机制、时间轴生成2套模式 优化 
+* @version  1.1 
+* @update 2014-01-06  优化懒加载机制-textarea
 **/
  
 KISSY.add(function(S, RealTime){
@@ -120,8 +120,11 @@ KISSY.add(function(S, RealTime){
             // 活动展现内容区块 钩子
             merchBlockCls: '.j_ul',
 
-            // 活动区块内容 图片 伪类src属性 钩子 --- 若 图片懒加载 则为 data-ks-lazyload,否则图片展现不出来哈！ 不填写 默认为 data-src
-            lazyLoadSrc: ''              
+            // 是否执行懒加载 textarea中的 js
+            execScript: true,
+
+            // 懒加载 textarea 钩子
+            dataLazyloadCls: 'data-lazyload-cls'    
         };  
 
 
@@ -143,7 +146,7 @@ KISSY.add(function(S, RealTime){
         // 支持的事件
         SpikeTimeline.events = [
             /**  
-            * 过去时间段 时间触发
+            * 过去时间段 时间触发 -- 
             * @event passSpikeChange  
             * @param {event} el对象
             * @param {Array} el.elTarget Dom元素
@@ -155,6 +158,7 @@ KISSY.add(function(S, RealTime){
             * @event currSpikeChange  
             * @param {event} el对象
             * @param {Array} el.elTarget Dom元素
+            * @param {Array} el.timeStr  当前时间标签-字符串   
             */
             'currSpikeChange',
 
@@ -175,12 +179,7 @@ KISSY.add(function(S, RealTime){
                     var _self = this;    
                        
                     _self._argumentsInit();
-					
-                    if(!_self.get('lazyLoadSrc')){
-                        _self.set('lazyLoadSrc', IMG_DATA_SRC); 
-                        _self.renderImgSrc();   
-                    }
-									
+													
                     _self._hideAllAcitve(); 
 					
                     _self._blockStateRender(); 
@@ -216,7 +215,7 @@ KISSY.add(function(S, RealTime){
                     if(_self.get('timeTemplate')){
                         TEMPLATE = _self.get('timeTemplate');
                     }else{
-                        S.use('gallery/spike-Timeline/1.0/spikectrl.css');
+                        S.use('gallery/spike-Timeline/1.1/spikectrl.css');
                     }
 
                     _self._updateMainTime();
@@ -343,39 +342,30 @@ KISSY.add(function(S, RealTime){
 					return el;
                 },
                
-			    // 渲染懒加载图片
-				renderImgLazyLoad: function(el){
+			    // 渲染 textarea 懒加载资源
+				renderDataLazyLoad: function(el){
 					var _self = this,
-						Aimgs = [];
+						textareas_cls = S.get('.'+_self.get('dataLazyloadCls'), el);
 						
-					if(el){
-						Aimgs = S.query('img', el);
-					}
-					
-                    S.each(Aimgs, function(el){
-                        var rotoSrc = DOM.attr(el, _self.get('lazyLoadSrc') ),
-							src = DOM.attr(el, 'src');
-						
-						if(rotoSrc === src){
-							return;
-						}
-						
-                        rotoSrc && DOM.attr(el, 'src', rotoSrc);                        
-                    }); 					
-				},				
-			   
-                // 懒加载 图片 初始化
-                renderImgSrc: function(){
-                    var _self = this,
-                        Aimgs = S.query('img', S.get(_self.get('merchContainer')) );
+                    textareas_cls && _self.loadAreaData(textareas_cls);			
+				},		
 
-                    S.each(Aimgs, function(el){
-                        var rotoSrc = DOM.attr(el, 'src');
-						
-						DOM.attr(el, 'src', IMG_SRC);
-						
-                        rotoSrc && DOM.attr(el, _self.get('lazyLoadSrc'), rotoSrc);                        
-                    }); 
+                // 从 textarea 中加载数据
+                loadAreaData: function (textarea) {
+                    var _self = this,
+                        html = textarea.value || '',
+                        content = DOM.create('<div>');
+
+                    // 采用隐藏 textarea 但不去除方式，去除会引发 Chrome 下错乱                  
+                    textarea.style.width = 0;
+                    textarea.style.height = 0;
+                    textarea.style.display = 'none';
+                    textarea.className = ''; // clear hook
+
+                    // textarea 直接是 container 的儿子
+                    textarea.parentNode.insertBefore(content, textarea);
+
+                    DOM.html(content, html, _self.get('execScript') );
                 },
 
                 // 事件初始化
@@ -465,7 +455,7 @@ KISSY.add(function(S, RealTime){
                     _self._hideAllAcitve();
 
                     DOM.show(elNode);
-                    _self.renderImgLazyLoad(elNode);  
+                    _self.renderDataLazyLoad(elNode);  
                 },
 
                 // 隐藏所有秒杀 活动区块
@@ -554,7 +544,7 @@ KISSY.add(function(S, RealTime){
                     DOM.addClass(el, donecls);
                     DOM.text(textContainer, _self.get('pastStateText'));
 
-                    _self.fire('passSpikeChange', {"elTarget":el});  
+                    // _self.fire('passSpikeChange', {"elTarget":el});  
                 },
 
                 // 添加当前样式
@@ -580,7 +570,7 @@ KISSY.add(function(S, RealTime){
                     // 存储目标
                     _self.currTimeBlock = el;    
 
-                    _self.fire('currSpikeChange', {"elTarget":el});
+                    _self.fire('currSpikeChange', {"elTarget":el, "timeStr": DOM.attr( el, BLOCK_DATA_TIME) });
                 },
 
                 // 添加即将秒杀样式
@@ -600,7 +590,7 @@ KISSY.add(function(S, RealTime){
                     DOM.addClass(el, futruecls);
                     DOM.text(textContainer, _self.get('futureStateText'));
 
-                    _self.fire('futureSpikeChange', {"elTarget":el});
+                    // _self.fire('futureSpikeChange', {"elTarget":el});
                 },
 
                 // 清空 样式 钩子 和 状态值
@@ -690,4 +680,4 @@ KISSY.add(function(S, RealTime){
 
     return SpikeTimeline; 
 
-}, {'requires':['gallery/real-time/1.0/index']});
+}, {'requires':['gallery/real-time/1.1/index']});
