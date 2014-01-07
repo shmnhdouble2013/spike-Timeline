@@ -1,12 +1,19 @@
 /* 
 * 秒杀导航css --水木年华doube 
-* update 2013-11-16
-* 修改 span标签 为左浮动块级元素
+* update 2014-01-07
+* 修改 添加 data-lazyload-cls 懒加载textarea 样式
 */
 
 body{
   font: 12px/1.5 tahoma,arial,\5b8b\4f53;
 }
+
+.data-lazyload-cls{
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 
 .clear-both{
 	clear: both;
@@ -107,3 +114,4 @@ body{
     color: #087EB6;
   }
 
+ 

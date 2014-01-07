@@ -10,7 +10,7 @@ gallery/spike-Timeline/1.0/index
 * @extends  KISSY.Base
 * @creator  黄甲(水木年华double)<huangjia2015@gmail.com>
 * @depends  ks-core
-* @version  2.0  
+* @version  1.0  
 * @update 2013-11-20  修正自定义 img-layzload机制、时间轴生成2套模式 优化 
 **/
  
