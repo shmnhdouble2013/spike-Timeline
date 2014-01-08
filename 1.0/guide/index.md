@@ -5,7 +5,7 @@ SpikeTimeline 她是一个 时间轴与活动展现管理组件, 根据实时服
 
 * 版本：1.0
 * 作者：水木年华double ```<huangjia2015@gmail.com>```
-* demo：[http://gallery.kissyui.com/spike-Timeline/1.0/demo/index.html](http://gallery.kissyui.com/spike-Timeline/1.0/demo/index.html)
+* demo：[http://gallery.kissyui.com/spike-Timeline/1.0/demo/index.php](http://gallery.kissyui.com/spike-Timeline/1.0/demo/index.php)
 
 
 ## 支持特性如下：
