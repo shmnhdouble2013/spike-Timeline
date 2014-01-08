@@ -5,7 +5,7 @@ SpikeTimeline 她是一个 时间轴与活动展现管理组件, 根据实时服
 * 版本：1.1
 * 更新日期：20140107
 * 作者：水木年华double ```<huangjia2015@gmail.com>```
-* demo：[http://gallery.kissyui.com/spike-Timeline/1.1/demo/index.html](http://gallery.kissyui.com/spike-Timeline/1.1/demo/index.html)
+* demo：[http://gallery.kissyui.com/spike-Timeline/1.1/demo/index.php](http://gallery.kissyui.com/spike-Timeline/1.1/demo/index.php)
 
 
 ## 支持特性如下：
@@ -45,10 +45,13 @@ SpikeTimeline 她是一个 时间轴与活动展现管理组件, 根据实时服
 
 ## 必读说明！！！ ##
 
-1. 懒加载textarea钩子为： <textarea class="data-lazyload-cls" style="width:0; height:0; display:none;"> 需要懒加载的内容... </textarea> ;
+1. 数据懒加载采用textarea方式，其钩子为：
+ `<textarea class="data-lazyload-cls" style="width:0; height:0; display:none;"> 需要懒加载的内容... </textarea>` 
+ 
+     ps：图片懒加载 想当前时间下图片也不展示，请参加 [kissy datalazyload](http://gallery.kissyui.com/datalazyload/1.0.1/guide/index.html)组件配合使用  
 
 2. 关于时间段 与 活动区块的关联说明： 时间段 区块 和 活动容器内的相对区块内容一一对应，即 时间轴第一个时间段 对应 活动容器里 第一个 活动区块；
-3. 关于时间轴组件 样式/Dom结构 说明：本例内置模板展现时间轴样式，若不满足需求，你可以自定义你的模板dom结构字符串传入，并配置相应的钩子和样式即可， 即：自定义样式结构，调用组件 传入相应的钩子，进行时间更新、样式、活动切换控制等逻辑应用；
+3. 关于时间轴组件 样式/dom结构 说明：本例内置模板展现时间轴样式，若不满足需求，你可以自定义你的模板dom结构字符串传入，并配置相应的钩子和样式即可， 即：自定义样式结构，调用组件 传入相应的钩子，进行时间更新、样式、活动切换控制等逻辑应用；
 
 
 
@@ -163,16 +166,14 @@ var defCfg = {
 
 
 ## API说明 --- 支持事件 ##
-
-```javascript
-
-/**  
-* 当前时间段 时间触发
-* @event currSpikeChange  
-* @param {event} el对象
-* @param {Array} el.elTarget Dom元素 
-* @param {Array} el.timeStr  当前时间标签-字符串  比如：12:00 
-*/
-'currSpikeChange',
+    /**  
+	* 'currSpikeChange'
+    * 当前时间段 时间触发
+    * @event currSpikeChange  
+    * @param {event} el对象
+    * @param {Array} el.elTarget Dom元素 
+    * @param {Array} el.timeStr  当前时间标签-字符串  比如：12:00 
+    */
+    
 
 	
