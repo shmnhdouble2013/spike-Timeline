@@ -18,6 +18,7 @@ SpikeTimeline 她是一个 时间轴与活动展现管理组件, 根据实时服
 6. 支持自定义模板等；
 7. 升级优化懒加载机制，采用textarea方式 懒加载Dom元素;
 8. 其他灵活配置 比如：各个 时间段 3种不同的状态下可配置是否可点击查看，以及点击样式等;
+9. 时间标签click 事件 和 当前时间段 自动切换 触发事件，让你能够灵活自如的控制 当前时间相对应的 活动渲染和展现 形式；
 
 
 
@@ -171,8 +172,16 @@ var defCfg = {
     * 当前时间段 时间触发
     * @event currSpikeChange  
     * @param {event} el对象
-    * @param {Array} el.elTarget Dom元素 
+    * @param {Array} el.elTarget 时间标签dom元素 
     * @param {Array} el.timeStr  当前时间标签-字符串  比如：12:00 
+    */
+
+	/**  
+    * 时间标签click 事件触发
+    * @event spikeTimeClick  
+    * @param {event} el对象
+    * @param {Array} el.elTarget 时间标签dom元素
+    * @param {Array} el.timeStr  当前时间标签-字符串 比如：10:00   
     */
     
 
