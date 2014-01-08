@@ -153,7 +153,7 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
             * 过去时间段 时间触发 -- 
             * @event passSpikeChange  
             * @param {event} el对象
-            * @param {Array} el.elTarget Dom元素
+            * @param {Array} el.elTarget 时间标签dom元素
             */
             'passSpikeChange',
             
@@ -161,8 +161,8 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
             * 当前时间段 时间触发
             * @event currSpikeChange  
             * @param {event} el对象
-            * @param {Array} el.elTarget Dom元素
-            * @param {Array} el.timeStr  当前时间标签-字符串   
+            * @param {Array} el.elTarget 时间标签dom元素
+            * @param {Array} el.timeStr  当前时间标签-字符串   比如：12:00  
             */
             'currSpikeChange',
 
@@ -170,9 +170,19 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
             * 未来时间段 时间触发
             * @event futureSpikeChange  
             * @param {event} el对象
-            * @param {Array} el.elTarget Dom元素
+            * @param {Array} el.elTarget 时间标签dom元素
             */
-            'futureSpikeChange'   
+            'futureSpikeChange',   
+
+            /**  
+            * 时间标签click 事件触发
+            * @event spikeTimeClick  
+            * @param {event} el对象
+            * @param {Array} el.elTarget 时间标签dom元素
+            * @param {Array} el.timeStr  当前时间标签-字符串   比如：10:00 
+            */
+            'spikeTimeClick'
+
         ];   
 
         S.extend(SpikeTimeline, S.Base);
@@ -226,8 +236,12 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
 
                     _self._getNewYMD();
 
-                    // 各个时间段 秒杀 区块儿 活动内容区 集合
-                    _self.aBlocks = S.query( _self.get('merchBlockCls'), S.get(_self.get('merchContainer')) );                    
+                    // 各个时间段 秒杀 区块儿 活动内容区 集合 
+                    if(_self.get('merchBlockCls') && S.get(_self.get('merchContainer')) ){
+                        _self.aBlocks = S.query( _self.get('merchBlockCls'), S.get(_self.get('merchContainer')) );  
+                    }else{
+                        _self.aBlocks = null;
+                    }                                     
                 },  
 				
 				// 更新 实时时间 年月日
@@ -348,8 +362,13 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
                
 			    // 渲染 textarea 懒加载资源
 				renderDataLazyLoad: function(el){
-					var _self = this,
-						textareas_cls = S.get('.'+_self.get('dataLazyloadCls'), el);
+					var _self = this;
+
+                    if(!el){
+                        return;
+                    }
+					
+                    var textareas_cls = S.get('.'+_self.get('dataLazyloadCls'), el);
 						
                     textareas_cls && _self.loadAreaData(textareas_cls);			
 				},		
@@ -378,6 +397,7 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
 
                     // 监控点击事件
                     Event.on(_self.get('timeBlockCls'), 'click', function(event){
+                        _self.fire('spikeTimeClick', {"elTarget":this, "timeStr": DOM.attr(this, BLOCK_DATA_TIME)} );   
                         _self._timeClickIf(this);
                     });
                 },
@@ -453,10 +473,19 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
                 // 1、传入元素参数--判断显示指定时间段活动内容;
                 _showRangeTimeMeched: function(el){
                     var _self = this,
-                        showIndex = parseInt(DOM.attr(el, VIEW_INDEX), 10),
-                        elNode = _self.aBlocks[showIndex];
+                        showIndex = parseInt(DOM.attr(el, VIEW_INDEX), 10);
+
+                    if(!_self.aBlocks){
+                        return;
+                    }    
+                    
+                    var elNode = _self.aBlocks[showIndex];
 
                     _self._hideAllAcitve();
+
+                    if(!elNode){
+                        return;
+                    }
 
                     DOM.show(elNode);
                     _self.renderDataLazyLoad(elNode);  
@@ -466,7 +495,7 @@ KISSY.add('gallery/spike-Timeline/1.1/index',function(S, RealTime){
                 _hideAllAcitve: function(){
                     var _self = this;
 
-                    S.each(_self.aBlocks, function(em){                       
+                    _self.aBlocks && S.each(_self.aBlocks, function(em){                       
                         DOM.hide(em);                     
                     });
                 },
