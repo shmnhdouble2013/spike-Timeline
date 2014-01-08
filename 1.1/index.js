@@ -1,3 +1,4 @@
+
 /** 
 * @fileOverview 天猫双十一秒杀时间轴控制器(固定间隔时间 和 自定义 时间数组 2套生成时间轴方式，支持 时/分 时间高度灵活配置)   
 * @module spike-Timeline 
@@ -9,10 +10,9 @@
 **/
  
 KISSY.add(function(S, RealTime){
-        var Event = S.Event,
-            DOM = S.DOM,
-            Ajax = S.io;
-
+       var Event = S.Event,
+           DOM = S.DOM;
+           
         // 常量 1       
         var VIEW_INDEX = 'data-index',
             BLOCK_DATA_TIME = 'data-time',
@@ -25,9 +25,7 @@ KISSY.add(function(S, RealTime){
             ONE_HOURS = 1000*60*60,
             ONE_DAY = 1000*60*60*24;
 
-        var IMG_SRC = 'http://g.tbcdn.cn/s.gif',
-			REALTIME,
-            IMG_DATA_SRC = 'data-src',
+        var REALTIME,
             TEMPLATE = '<a class="j_timeBlock"><span class="hours"></span><span class="state"></span></a>',
             TIMES_Ary = [];      
     
@@ -680,4 +678,4 @@ KISSY.add(function(S, RealTime){
 
     return SpikeTimeline; 
 
-}, {'requires':['gallery/real-time/1.1/index']});
+}, {'requires':['gallery/real-time/1.0/index']});

@@ -550,12 +550,12 @@
         S.Config.debug = true;
 
     if (S.Config.debug) {
-        var srcPath = "../../";
+        var srcPath = "../../../";
 
         S.config({
             packages:[
                 {
-                    name:"gallery/spike-Timeline",
+                    name:"gallery",
                     path:srcPath,
                     charset:"utf-8",
                     ignorePackageNameInUri:true
